@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Memory" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Memory" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="raylib_config" />
+				<Compiler>
+					<Add option="-Og" />
+					<Add option="-g" />
+					<Add option="-DDEBUG" />
+					<Add directory="C:/raylib/raylib/src" />
+				</Compiler>
+				<Linker>
+					<Add option="-static-libgcc" />
+					<Add option="-Iexternal -lraylib -lopengl32 -lgdi32 -lwinmm -lpthread" />
+					<Add library="C:/raylib/mingw/i686-w64-mingw32/lib/libraylib.a" />
+					<Add directory="C:/raylib/raylib/src" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Memory" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="raylib_config" />
+				<Compiler>
+					<Add option="-DRELEASE" />
+					<Add directory="../../../../raylib/raylib/src" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libgcc" />
+					<Add option="-Iexternal -lraylib -lopengl32 -lgdi32 -lwinmm -lpthread" />
+					<Add library="../../../../../../raylib/mingw/i686-w64-mingw32/lib/libraylib.a" />
+					<Add directory="../../../../raylib/raylib/src" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Board.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Board.h" />
+		<Unit filename="Icon.ico" />
+		<Unit filename="Sprite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="icon.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="include/Sprite.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="util.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="util.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

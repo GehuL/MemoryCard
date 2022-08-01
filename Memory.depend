@@ -1,0 +1,99 @@
+# depslib dependency file v1.0
+1598547728 source:c:\users\lauric\desktop\c++\projets\memory\main.c
+	<string.h>
+	"Board.h"
+
+1598548354 source:c:\users\lauric\desktop\c++\projets\memory\board.c
+	"Board.h"
+
+1598548052 c:\users\lauric\desktop\c++\projets\memory\board.h
+	<string.h>
+	"raylib.h"
+
+1599651574 source:c:\users\lauric.desktop-6s83iem\documents\memory\main.c
+	<string.h>
+	<time.h>
+	"Board.h"
+
+1599653681 c:\users\lauric.desktop-6s83iem\documents\memory\board.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+
+1629373644 c:\raylib\raylib\src\raylib.h
+	<stdarg.h>
+	<stdbool.h>
+
+1599653702 source:c:\users\lauric.desktop-6s83iem\documents\memory\board.c
+	"Board.h"
+
+1613038993 source:c:\users\lauric.desktop-6s83iem\documents\devs\memory\board.c
+	"Board.h"
+
+1599650081 c:\users\lauric.desktop-6s83iem\documents\devs\memory\board.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+
+1613039043 source:c:\users\lauric.desktop-6s83iem\documents\devs\memory\main.c
+	<string.h>
+	<time.h>
+	"Board.h"
+
+1636207099 source:c:\users\lauric\documents\programmes\memory\board.c
+	<stdarg.h>
+	<time.h>
+	"Board.h"
+	"util.h"
+	"include/Sprite.h"
+
+1629275393 c:\users\lauric\documents\programmes\memory\board.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+	"include/Sprite.h"
+
+1636206692 source:c:\users\lauric\documents\programmes\memory\main.c
+	"Board.h"
+
+1636208253 source:c:\users\lauric\documents\programmes\memory\util.c
+	"util.h"
+	"windows.h"
+
+1636208310 c:\users\lauric\documents\programmes\memory\util.h
+
+1629219261 source:c:\users\lauric\documents\programmes\memory\sprite.c
+	"include/Sprite.h"
+
+1629219994 c:\users\lauric\documents\programmes\memory\include\sprite.h
+	"raylib.h"
+
+1629293620 source:c:\users\lauric\documents\programmes\memory\icon.rc
+
+1629297220 source:c:\users\lauric.lauric-pc\documents\programmes\memory\icon.rc
+
+1629222861 source:c:\users\lauric.lauric-pc\documents\programmes\memory\sprite.c
+	"include/Sprite.h"
+
+1629223594 c:\users\lauric.lauric-pc\documents\programmes\memory\include\sprite.h
+	"raylib.h"
+
+1636210292 source:c:\users\lauric.lauric-pc\documents\programmes\memory\main.c
+	"Board.h"
+
+1659363849 c:\users\lauric.lauric-pc\documents\programmes\memory\board.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+	"include/Sprite.h"
+
+1636211853 source:c:\users\lauric.lauric-pc\documents\programmes\memory\util.c
+	"util.h"
+	"windows.h"
+
+1636211910 c:\users\lauric.lauric-pc\documents\programmes\memory\util.h
+

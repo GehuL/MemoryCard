@@ -78,14 +78,16 @@ int gameScreenHeight, gameScreenWidth;
 float screenRatio; // Ratio width / height.
 float widthRatio = 1, heightRatio = 1;
 
-int gBestScore = 0;
-char best_score[13] = "?";
 
 RenderTexture renderer, blurRenderer;
 
 const int TIMER_1 = 1; // Temps avant que toutes les cartes se cachent
 const int TIMER_2 = 2; // Incremente le temps toute les 1 secondes
 const int TIMER_3 = 3; // Temps pour cacher les cartes
+
+SaveData gSaveData = {0};
+char best_score[256] = "?";
+bool hasBest = 0;
 
 //------------------------------------------------------------------------------------
 // Fontions
@@ -195,21 +197,24 @@ Texture2D loadRessource(const char* path, const char* name)
     return texture;
 }
 
-// Return -1 if could not read score.
-int LoadScore()
+
+bool LoadSave(SaveData* save)
 {
-    unsigned int bytesRead = 0;
-    int score = -1;
+    unsigned int bytesRead = -1;
     unsigned char* data = LoadFileData(SAVE_NAME, &bytesRead);
-    if(bytesRead >= sizeof(score))
-        score = (int) data[0];
-    printf("\nBest score: %d\n", score);
-    return score;
+
+    if(bytesRead == sizeof(SaveData))
+    {
+        memcpy(save, (const void*) data, sizeof(SaveData));
+        return true;
+    }
+    return false;
 }
 
-void SaveScore()
+void SaveScore(SaveData saveData)
 {
-    SaveFileData(SAVE_NAME, (void*)&gBestScore, sizeof(gBestScore));
+    printf("caca%d", sizeof(SaveData));
+    SaveFileData(SAVE_NAME, (void*)&saveData, sizeof(SaveData));
 }
 
 
@@ -303,11 +308,17 @@ void board_load(int width, int height, const char* title)
 
     keepRatio = true;
 
-    gBestScore = LoadScore();
-    if(gBestScore > 0)
-        sprintf(best_score, "%d", gBestScore);
+    if(LoadSave(&gSaveData))
+    {
+        sprintf(best_score, "\nEssais: %d\nTemps: %d\npar %s", gSaveData.bestScore, gSaveData.bestTime, gSaveData.userName);
+        hasBest = true;
+    }
     else
+    {
         sprintf(best_score, "%s", "?");
+        gSaveData.bestScore = 0xffffff;
+    }
+
 }
 
 void board_unload(void)
@@ -421,7 +432,7 @@ void drawBoard(void)
     // -------------------------------------- //
 
     // INFO
-    DrawTextEx(font, TextFormat("Essai%s: %d\nTemps: %d\nBest: %s", essais > 1 ? "s" : "", essais, temps, best_score), (Vector2)
+    DrawTextEx(font, TextFormat("Essai%s: %d\nTemps: %d\n\nRecord: %s", essais > 1 ? "s" : "", essais, temps, best_score), (Vector2)
     {
         0, 10
     }, FONT_SIZE, 2, DARKPURPLE);
@@ -501,11 +512,17 @@ void updatePlayingState(void)
                                 PlaySound(soundVictory);
                                 KillTimerEx(GetWindowHandle(), TIMER_2);
 
-                                if(essais > gBestScore)
+                                if(essais < gSaveData.bestScore)
                                 {
-                                    gBestScore = essais;
-                                    sprintf(best_score, "%d", gBestScore);
-                                    SaveScore();
+                                    gSaveData.bestScore = essais;
+                                    gSaveData.bestTime = temps;
+
+                                    getUserName(gSaveData.userName, sizeof(gSaveData.userName));
+
+                                    sprintf(best_score, "\nEssais: %d\nTemps: %d\npar %s", gSaveData.bestScore, gSaveData.bestTime, gSaveData.userName);
+                                    SaveScore(gSaveData);
+
+                                    hasBest = true;
                                 }
                             }
                             else

@@ -45,6 +45,13 @@ typedef struct Card
     int index;      // La frame dans le sprite
 } Card;
 
+typedef struct SaveData
+{
+    int bestScore;
+    int bestTime;
+    char userName[32];
+} SaveData;
+
 // Créer la fenetre, charge les ressources et initialize le plateau.
 void board_load(int width, int height, const char* title);
 

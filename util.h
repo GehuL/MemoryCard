@@ -14,6 +14,6 @@ unsigned int SetTimerEx(void* hwnd, unsigned int id, unsigned int time, void cb(
 
 int KillTimerEx(void* hwnd, unsigned int id);
 
-
+void getUserName(char* dest, int length);
 
 #endif // UTIL_H_INCLUDED

@@ -31,4 +31,9 @@ int KillTimerEx(void* hwnd, unsigned int id)
     return KillTimer(hwnd, id);
 }
 
+void getUserName(char* dest, int length)
+{
+    GetUserNameA(dest, &length);
+}
+
 #endif // UTIL_C_INCLUDED

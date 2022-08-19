@@ -1,7 +1,8 @@
-bin/* 
-obj/*
+bin 
+obj
 save
-VictoryCard2.xcf
+
+*.o
 
 # Code block files
 Memory.cbp

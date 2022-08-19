@@ -16,7 +16,6 @@
 #endif // DEBUG
 
 #define TUTO "Clique gauche = Voir carte\nClique droit = Recommencer\n\nH = Cacher les cartes trouvees\nN = Mode difficile\n\nEchap = Quitter"
-#define AUTHEUR "Autheur G.Lauric\n"
 
 #define FONT_SIZE 30
 #define FONT "C:\\Windows\\Fonts\\crete-round.ttf"
@@ -213,7 +212,6 @@ bool LoadSave(SaveData* save)
 
 void SaveScore(SaveData saveData)
 {
-    printf("caca%d", sizeof(SaveData));
     SaveFileData(SAVE_NAME, (void*)&saveData, sizeof(SaveData));
 }
 
@@ -441,12 +439,6 @@ void drawBoard(void)
     DrawTextEx(font, TUTO, (Vector2)
     {
         gameScreenWidth - 265, 0
-    }, FONT_SIZE - 10, 2, DARKPURPLE);
-
-    // CREDIT
-    DrawTextEx(font, AUTHEUR, (Vector2)
-    {
-        gameScreenWidth - 220, gameScreenHeight - 80
     }, FONT_SIZE - 10, 2, DARKPURPLE);
 
 

@@ -1,2 +1,4 @@
-bin 
-obj
+bin/* 
+obj/*
+save
+VictoryCard2.xcf

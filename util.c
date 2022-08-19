@@ -2,7 +2,9 @@
 #define UTIL_C_INCLUDED
 
 #include "util.h"
-#include "windows.h"
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int showMessageBox(void* hwnd, const char* title, const char* msg, unsigned int type)
 {
@@ -28,6 +30,5 @@ int KillTimerEx(void* hwnd, unsigned int id)
 {
     return KillTimer(hwnd, id);
 }
-
 
 #endif // UTIL_C_INCLUDED

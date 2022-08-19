@@ -16,7 +16,7 @@
 #endif // DEBUG
 
 #define TUTO "Clique gauche = Voir carte\nClique droit = Recommencer\n\nH = Cacher les cartes trouvees\nN = Mode difficile\n\nEchap = Quitter"
-#define AUTHEUR "Autheur G.Lauric\nGoobit corp"
+#define AUTHEUR "Autheur G.Lauric\n"
 
 #define FONT_SIZE 30
 #define FONT "C:\\Windows\\Fonts\\crete-round.ttf"
@@ -24,6 +24,8 @@
 #define MAX_TEXTURE 32
 
 #define CENTER_IN_SCREEN(width, height) (Vector2){GetScreenWidth() / 2 - width / 2, GetScreenHeight() / 2 - height / 2}
+
+#define SAVE_NAME "save"
 
 //------------------------------------------------------------------------------------
 // Variables de jeu
@@ -76,6 +78,9 @@ int gameScreenHeight, gameScreenWidth;
 float screenRatio; // Ratio width / height.
 float widthRatio = 1, heightRatio = 1;
 
+int gBestScore = 0;
+char best_score[13] = "?";
+
 RenderTexture renderer, blurRenderer;
 
 const int TIMER_1 = 1; // Temps avant que toutes les cartes se cachent
@@ -85,8 +90,6 @@ const int TIMER_3 = 3; // Temps pour cacher les cartes
 //------------------------------------------------------------------------------------
 // Fontions
 //------------------------------------------------------------------------------------
-
-
 void revealAllCard(bool);
 void drawCard(void);
 void drawBoard(void);
@@ -192,6 +195,24 @@ Texture2D loadRessource(const char* path, const char* name)
     return texture;
 }
 
+// Return -1 if could not read score.
+int LoadScore()
+{
+    unsigned int bytesRead = 0;
+    int score = -1;
+    unsigned char* data = LoadFileData(SAVE_NAME, &bytesRead);
+    if(bytesRead >= sizeof(score))
+        score = (int) data[0];
+    printf("\nBest score: %d\n", score);
+    return score;
+}
+
+void SaveScore()
+{
+    SaveFileData(SAVE_NAME, (void*)&gBestScore, sizeof(gBestScore));
+}
+
+
 void board_load(int width, int height, const char* title)
 {
     srand( time( NULL ) );
@@ -281,6 +302,12 @@ void board_load(int width, int height, const char* title)
     hideFoundCard = 0;
 
     keepRatio = true;
+
+    gBestScore = LoadScore();
+    if(gBestScore > 0)
+        sprintf(best_score, "%d", gBestScore);
+    else
+        sprintf(best_score, "%s", "?");
 }
 
 void board_unload(void)
@@ -394,7 +421,7 @@ void drawBoard(void)
     // -------------------------------------- //
 
     // INFO
-    DrawTextEx(font, TextFormat("Essai%s: %d\nTemps: %d", essais > 1 ? "s" : "", essais, temps), (Vector2)
+    DrawTextEx(font, TextFormat("Essai%s: %d\nTemps: %d\nBest: %s", essais > 1 ? "s" : "", essais, temps, best_score), (Vector2)
     {
         0, 10
     }, FONT_SIZE, 2, DARKPURPLE);
@@ -468,11 +495,18 @@ void updatePlayingState(void)
                             memset(pair, 0, 2 * sizeof(Card*));
 
                             found += 2;
-                            if(found >= MAX_CARDS)
+                            if(found >= MAX_CARDS) // Victoire
                             {
                                 state = Win;
                                 PlaySound(soundVictory);
                                 KillTimerEx(GetWindowHandle(), TIMER_2);
+
+                                if(essais > gBestScore)
+                                {
+                                    gBestScore = essais;
+                                    sprintf(best_score, "%d", gBestScore);
+                                    SaveScore();
+                                }
                             }
                             else
                                 PlaySound(soundFound);

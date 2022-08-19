@@ -2,7 +2,7 @@
 
 Jeu de carte pour améliorer sa mémoire visuelle.
 
-![en partie](rsc/textures/screenshot1.png)
+![en partie](rsc/textures/screenshot.png)
 ![victoire](rsc/textures/screenshot2.png)
 
 ## Principe

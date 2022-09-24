@@ -1,6 +1,8 @@
 #include <stdarg.h>
 #include <time.h>
 #include "Board.h"
+#include "raygui.h"
+#include "Utils.h"
 
 #define RSCP "rsc/" // ressource path
 #define TEXTURES_P "rsc/textures/"
@@ -8,7 +10,7 @@
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
-#ifdef DEBUG
+#ifdef _DEBUG
 #define debugP print_debug
 #else
 #define debugP(f, ...)
@@ -86,7 +88,6 @@ RenderTexture renderer, blurRenderer;
 
 SaveData gSaveData = {0};
 char best_score[256] = "?";
-bool hasBest = 0;
 
 //------------------------------------------------------------------------------------
 // Fontions
@@ -171,7 +172,6 @@ Texture2D loadRessource(const char *path, const char *name)
     if (texture.id == 0)
     {
         board_unload();
-        // showMessageBox(0, "Memory", TextFormat("Failed to load %s", name), 0);
         exit(EXIT_FAILURE);
     }
 
@@ -192,9 +192,12 @@ bool LoadSave(SaveData *save)
     return false;
 }
 
-void SaveScore(SaveData saveData)
+void SaveScore(void)
 {
-    SaveFileData(SAVE_NAME, (void *)&saveData, sizeof(SaveData));
+    gSaveData.bestScore = essais;
+    gSaveData.bestTime = temps;
+    GetUserName(gSaveData.userName, sizeof(gSaveData.userName));
+    SaveFileData(SAVE_NAME, (void *)&gSaveData, sizeof(SaveData));
 }
 
 void board_load(int width, int height, const char *title)
@@ -291,7 +294,6 @@ void board_load(int width, int height, const char *title)
     if (LoadSave(&gSaveData))
     {
         sprintf(best_score, "\nEssais: %d\nTemps: %d\npar %s", gSaveData.bestScore, gSaveData.bestTime, gSaveData.userName);
-        hasBest = true;
     }
     else
     {
@@ -399,11 +401,6 @@ void drawBoard(void)
                    (Rectangle){0, 0, gameScreenWidth, gameScreenHeight},
                    (Vector2){0, 0}, 0, WHITE);
 
-#ifdef DEBUG
-    for (int i = 0; i < MAX_CARDS; i++)
-        DrawRectangleRec(cards[i].hitbox, (Color){255, 0, 0, 100});
-#endif // DEBUG
-
     // -------------------------------------- //
     // ------------ TEXT DRAWING ------------ //
     // -------------------------------------- //
@@ -414,7 +411,7 @@ void drawBoard(void)
     // TUTO
     DrawTextEx(font, TUTO, (Vector2){gameScreenWidth - 265, 0}, FONT_SIZE - 10, 2, DARKPURPLE);
 
-#ifdef DEBUG
+#ifdef _DEBUG
     DrawText(TextFormat("%d\nx: %d y: %d", GetFPS(), GetMouseX(), GetMouseY()), 0, GetScreenHeight() - (FONT_SIZE + 20), FONT_SIZE - 10, RED);
 #endif
 
@@ -479,17 +476,10 @@ void updatePlayingState(void)
                                 state = Win;
                                 PlaySound(soundVictory);
 
-                                if (essais < gSaveData.bestScore)
+                                if (essais < gSaveData.bestScore || (essais == gSaveData.bestScore && temps < gSaveData.bestTime))
                                 {
-                                    gSaveData.bestScore = essais;
-                                    gSaveData.bestTime = temps;
-
-                                    // getUserName(gSaveData.userName, sizeof(gSaveData.userName));
-
+                                    SaveScore();
                                     sprintf(best_score, "\nEssais: %d\nTemps: %d\npar %s", gSaveData.bestScore, gSaveData.bestTime, gSaveData.userName);
-                                    SaveScore(gSaveData);
-
-                                    hasBest = true;
                                 }
                             }
                             else

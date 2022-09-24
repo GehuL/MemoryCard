@@ -18,9 +18,10 @@ Lorsque le joueur fait un clique droit, toutes les cartes sont mélangées aléa
 
 ## Plateforme
 
-Le jeu ne fonctionne que sur Windows pour le moment.
-Utilisant la librairie Raylib, le jeu pourrait tourner sur d'autre OS comme linux, MacOS et bien d'autres.
-Cependant j'ai utilisé des fonctions de l'API Windows.
+La librairie Raylib supporte de nombreuses plateformes, à ce jour celle
+qui ont été testé sont:
+- Windows 7
+- MacOS High Sierra (v10.13.6)
 
 ## Build
 
@@ -34,4 +35,4 @@ J'ai programmé le jeu pour m'amuser et en apprendre davantage sur le développe
 
 - Le joueur à la possibilité de changer de textures des cartes.
 - Le joueur peut choisir le nombre de cartes sur le plateau.
-- Rendre le jeu multiplate-forme.
+- Rendre le jeu multiplate-forme (Windows, MacOS, Linux, Android...).

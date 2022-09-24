@@ -3,7 +3,7 @@
 #define WIDTH 1080
 #define HEIGHT 768
 
-int main()
+int main(int argc, char **argv)
 {
     board_load(WIDTH, HEIGHT, "Memory");
 

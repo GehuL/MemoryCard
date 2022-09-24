@@ -1,7 +1,7 @@
+# Binaries
 bin 
 obj
 save
-
 *.o
 
 # Code block files
@@ -9,3 +9,10 @@ Memory.cbp
 Memory.cscope_file_list
 Memory.depend
 Memory.layout
+
+# VS code
+*.json
+
+# Make
+Makefile
+

@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "raylib.h"
-#include "include/Sprite.h"
 
 #define HRESOLUTION  768
 #define WRESOLUTION  1024
@@ -52,21 +51,21 @@ typedef struct SaveData
     char userName[32];
 } SaveData;
 
-// Créer la fenetre, charge les ressources et initialize le plateau.
+// Crï¿½er la fenetre, charge les ressources et initialize le plateau.
 void board_load(int width, int height, const char* title);
 
-// Gere les entrées souris/clavier et evenements fenetre
+// Gere les entrï¿½es souris/clavier et evenements fenetre
 // Execute la logique de la partie et les graphismes.
 void board_loop(void);
 
-// Détruit la fenetre et decharge les ressources.
+// Dï¿½truit la fenetre et decharge les ressources.
 void board_unload(void);
 
-// Appelle le callback pour chaque touche pressé, relaché ou enfoncé.
+// Appelle le callback pour chaque touche pressï¿½, relachï¿½ ou enfoncï¿½.
 void board_keyboardCallback(void (*func)(int, KEY_STATE));
 
-// Si Oui est true, la taille gardera le même ratio en fonction de l'orientation.
-// Sinon orientation peut être ommis.
+// Si Oui est true, la taille gardera le mï¿½me ratio en fonction de l'orientation.
+// Sinon orientation peut ï¿½tre ommis.
 void board_keepRatio(bool oui, Orientation);
 
 #endif // BOARD_H_INCLUDED

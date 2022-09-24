@@ -11,7 +11,8 @@ Memory.depend
 Memory.layout
 
 # VS code
-*.json
+.vscode/*
+*.dSYM/*
 
 # Make
 Makefile
